@@ -6,13 +6,13 @@ import time
 transactions = []
 
 
-def encrypt_transaction(hash_data):
-    digital_signature = hashlib.sha256(hash_data.encode().hexidigest())
+def encrypt_transaction(hash_transaction):
+    digital_signature = hashlib.sha256(hash_transaction.encode()).hexdigest()
     return digital_signature
 
 
 def is_valid_signature(hash):
-    if hash.starts_with("0000"):
+    if hash.startswith("0000"):
         return True
     return False
 
@@ -22,7 +22,7 @@ def hash_transaction(data, timestamp, previoushash, index):
     nonce = 0
     while not is_valid_signature(_hash):
         _input = data + str(timestamp) + \
-            str(previoushash + str(index) + str(nonce))
+            str(previoushash) + str(index) + str(nonce)
         _hash = encrypt_transaction(_input)
         nonce += 1
         print(nonce)
@@ -45,9 +45,9 @@ def get_all_transactions():
         print(transactions[1])
 
 
-def init_transaction():
-    data = "Angie pays 100 dollars "
-    timestamp = time.time()
-    previous_hash = 0
-    index = 0
-    hash_transaction(data, timestamp, previous_hash, index)
+# def init_transaction():
+#     data = "Angie pays 100 dollars "
+#     timestamp = time.time()
+#     previous_hash = 0
+#     index = 0
+#     hash_transaction(data, timestamp, previous_hash, index)
