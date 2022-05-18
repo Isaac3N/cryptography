@@ -12,7 +12,7 @@ def encrypt_transaction(hash_transaction):
 
 
 def is_valid_signature(hash):
-    if hash.startswith("0000"):
+    if hash.startswith("00"):
         return True
     return False
 
