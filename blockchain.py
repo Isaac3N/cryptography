@@ -12,7 +12,7 @@ def encrypt_transaction(hash_transaction):
 
 
 def is_valid_signature(hash):
-    if hash.startswith("00"):
+    if hash.startswith("0"):
         return True
     return False
 
@@ -42,12 +42,12 @@ def add_new_transaction(message):
 
 def get_all_transactions():
     for i in range(0, len(transactions)):
-        print(transactions[1])
+        print(transactions[i])
 
 
-# def init_transaction():
-#     data = "Angie pays 100 dollars "
-#     timestamp = time.time()
-#     previous_hash = 0
-#     index = 0
-#     hash_transaction(data, timestamp, previous_hash, index)
+def init_transaction():
+    data = "Angie pays 100 dollars"
+    timestamp = time.time()
+    previous_hash = 0
+    index = 0
+    hash_transaction(data, timestamp, previous_hash, index)
