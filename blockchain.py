@@ -3,7 +3,7 @@ import hashlib
 import time
 
 
-transactions = []
+blocks = []
 
 
 def encrypt_transaction(hash_transaction):
@@ -17,37 +17,37 @@ def is_valid_signature(hash):
     return False
 
 
-def hash_transaction(data, timestamp, previoushash, index):
+def hash_transaction(transaction, timestamp, previoushash, index):
     _hash = ""
     nonce = 0
     while not is_valid_signature(_hash):
-        _input = data + str(timestamp) + \
+        _input = transaction + str(timestamp) + \
             str(previoushash) + str(index) + str(nonce)
         _hash = encrypt_transaction(_input)
         nonce += 1
         print(nonce)
-    transactions.append(_hash)
+    blocks.append(_hash)
 
 
 def get_last_hash():
-    return transactions[len(transactions)-1]
+    return blocks[len(blocks)-1]
 
 
-def add_new_transaction(message):
-    _index = len(transactions)
+def add_new_block(transaction):
+    _index = len(blocks)
     timestamp = time.time()
     previous_hash = get_last_hash
-    hash_transaction(message, timestamp, previous_hash, _index)
+    hash_transaction(transaction, timestamp, previous_hash, _index)
 
 
-def get_all_transactions():
-    for i in range(0, len(transactions)):
-        print(transactions[i])
+def get_all_blocks():
+    for i in range(0, len(blocks)):
+        print(blocks[i])
 
 
-def init_transaction():
-    data = "Angie pays 100 dollars"
+def init_block():
+    transaction = "Angie Receives 100 dollars"
     timestamp = time.time()
     previous_hash = 0
     index = 0
-    hash_transaction(data, timestamp, previous_hash, index)
+    hash_transaction(transaction, timestamp, previous_hash, index)
